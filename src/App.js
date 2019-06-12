@@ -5,6 +5,7 @@ import awsmobile from "./aws-exports";
 import { withAuthenticator } from "aws-amplify-react";
 import { ApolloProvider } from "react-apollo";
 import { Rehydrated } from "aws-appsync-react";
+import { ApolloProvider as ApolloHooksProvider } from "react-apollo-hooks";
 import AWSAppSyncClient from "aws-appsync";
 import CreateTodo from "./components/createTodo";
 import ListTodos from "./components/listTodos";
@@ -27,37 +28,35 @@ const client = new AWSAppSyncClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Rehydrated>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            width: "1200px",
-            flexDirection: "column"
-          }}>
+      <ApolloHooksProvider client={client}>
+        <Rehydrated>
           <div
             style={{
+              display: "flex",
               flex: 1,
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
+              flexDirection: "column"
             }}>
-            <p
+            <div
               style={{
-                fontSize: 18
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
               }}>
-              Todos
-            </p>
+              <h1>Todos</h1>
+            </div>
+            <div style={{ display: "flex", flex: 2, flexDirection: "row" }}>
+              <div style={{ flex: 1 }}>
+                <ListTodos />
+              </div>
+              <div style={{ flex: 1 }}>
+                <CreateTodo />
+              </div>
+            </div>
           </div>
-          <div style={{ flex: 1 }}>
-            <ListTodos />
-          </div>
-          <div style={{ flex: 1 }}>
-            <CreateTodo />
-          </div>
-        </div>
-      </Rehydrated>
+        </Rehydrated>
+      </ApolloHooksProvider>
     </ApolloProvider>
   );
 }

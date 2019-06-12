@@ -28,9 +28,7 @@ const ListTodos = () => {
                 console.log("todo", todo);
                 return (
                   <li key={todo.id}>
-                    <p>
-                      {todo.name} - {todo.description}
-                    </p>
+                    {todo.name} - {todo.description}
                   </li>
                 );
               })}
