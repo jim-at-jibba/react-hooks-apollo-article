@@ -1,12 +1,13 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+
 import Amplify, { Auth } from "aws-amplify";
 import awsmobile from "./aws-exports";
 import { withAuthenticator } from "aws-amplify-react";
 import { ApolloProvider } from "react-apollo";
 import { Rehydrated } from "aws-appsync-react";
 import AWSAppSyncClient from "aws-appsync";
+import CreateTodo from "./components/createTodo";
+import ListTodos from "./components/listTodos";
 
 Amplify.configure(awsmobile);
 
@@ -29,17 +30,32 @@ function App() {
       <Rehydrated>
         <div
           style={{
+            display: "flex",
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#F5FCFF"
+            width: "1200px",
+            flexDirection: "column"
           }}>
-          <p
+          <div
             style={{
-              fontSize: 18
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
             }}>
-            Todos
-          </p>
+            <p
+              style={{
+                fontSize: 18
+              }}>
+              Todos
+            </p>
+          </div>
+          <div style={{ flex: 1 }}>
+            <ListTodos />
+          </div>
+          <div style={{ flex: 1 }}>
+            <CreateTodo />
+          </div>
         </div>
       </Rehydrated>
     </ApolloProvider>
