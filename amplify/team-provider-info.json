@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "react-apollo-hooks-20190612112354-authRole",
+            "UnauthRoleArn": "arn:aws:iam::193471113837:role/react-apollo-hooks-20190612112354-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::193471113837:role/react-apollo-hooks-20190612112354-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "react-apollo-hooks-20190612112354-deployment",
+            "UnauthRoleName": "react-apollo-hooks-20190612112354-unauthRole",
+            "StackName": "react-apollo-hooks-20190612112354",
+            "StackId": "arn:aws:cloudformation:eu-west-1:193471113837:stack/react-apollo-hooks-20190612112354/2ef3d610-8cfc-11e9-a076-06982f8c16e4"
+        },
+        "categories": {
+            "auth": {
+                "cognito8ed88849": {}
+            }
+        }
+    }
+}
