@@ -1,29 +1,48 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Amplify from "aws-amplify";
+import Amplify, { Auth } from "aws-amplify";
 import awsmobile from "./aws-exports";
 import { withAuthenticator } from "aws-amplify-react";
+import { ApolloProvider } from "react-apollo";
+import { Rehydrated } from "aws-appsync-react";
+import AWSAppSyncClient from "aws-appsync";
 
 Amplify.configure(awsmobile);
 
+const client = new AWSAppSyncClient({
+  url: awsmobile.aws_appsync_graphqlEndpoint,
+  region: awsmobile.aws_appsync_region,
+  disableOffline: true,
+  auth: {
+    type: awsmobile.aws_appsync_authenticationType,
+    credentials: () => Auth.currentCredentials(),
+    jwtToken: async () =>
+      (await Auth.currentSession()).getAccessToken().getJwtToken()
+  },
+  complexObjectsCredentials: () => Auth.currentCredentials()
+});
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+      <Rehydrated>
+        <div
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#F5FCFF"
+          }}>
+          <p
+            style={{
+              fontSize: 18
+            }}>
+            Todos
+          </p>
+        </div>
+      </Rehydrated>
+    </ApolloProvider>
   );
 }
 

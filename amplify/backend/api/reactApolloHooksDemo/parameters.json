@@ -1,0 +1,10 @@
+{
+    "AppSyncApiName": "reactApolloHooksDemo",
+    "DynamoDBBillingMode": "PAY_PER_REQUEST",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authcognito8ed88849",
+            "Outputs.UserPoolId"
+        ]
+    }
+}
